@@ -28,7 +28,7 @@ public class PlayerController : MonoBehaviour
 
     private void MoveForward()
     {
-        transform.position += Vector3.forward * Time.deltaTime;
+        transform.position += Vector3.forward * moveSpeed * Time.deltaTime;
     }
 
     private void ManageControl()
