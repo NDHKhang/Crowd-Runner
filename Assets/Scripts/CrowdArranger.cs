@@ -1,10 +1,11 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class CrowdArranger : MonoBehaviour
 {
-    [Header("GameObjects")]
+    [Header("References")]
     [SerializeField] private Transform charactersParent;
 
     [Header("Settings")]
@@ -32,5 +33,10 @@ public class CrowdArranger : MonoBehaviour
         float z = radius * Mathf.Sqrt(index) * Mathf.Sin(Mathf.Deg2Rad * index * angle);
 
         return new Vector3(x, 0, z);
+    }
+
+    public float GetCrowdRadius()
+    {
+        return radius * Mathf.Sqrt(charactersParent.childCount);
     }
 }

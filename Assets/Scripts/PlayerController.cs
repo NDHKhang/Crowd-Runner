@@ -5,10 +5,14 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    [Header("Character Settings")]
-    [SerializeField] private float moveSpeed;
+    [Header("References")]
+    [SerializeField] private CrowdArranger crowdArranger;
 
-    [Header("Controller Settings")]
+    [Header("Settings")]
+    [SerializeField] private float moveSpeed;
+    [SerializeField] private float roadWidth;
+
+    [Header("Controller")]
     [SerializeField] private float slideSpeed;
     private Vector3 clickedScreenpos;
     private Vector3 clickedPlayerpos;
@@ -49,6 +53,10 @@ public class PlayerController : MonoBehaviour
 
             Vector3 position = transform.position;
             position.x = clickedPlayerpos.x + xScreenDifference * slideSpeed;
+
+            position.x = Mathf.Clamp(position.x, -roadWidth / 2 + crowdArranger.GetCrowdRadius(),
+                roadWidth / 2 - crowdArranger.GetCrowdRadius());
+
             transform.position = position;
         }
     }

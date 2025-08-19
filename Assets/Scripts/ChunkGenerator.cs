@@ -7,7 +7,6 @@ public class ChunkGenerator : MonoBehaviour
     [Header("Prefabs")]
     [SerializeField] private Chunk[] chunksPrefab;
 
-
     // Start is called before the first frame update
     void Start()
     {

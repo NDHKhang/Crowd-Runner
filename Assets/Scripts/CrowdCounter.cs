@@ -6,7 +6,7 @@ using UnityEngine;
 
 public class CrowdCounter : MonoBehaviour
 {
-    [Header("GameObjects")]
+    [Header("References")]
     [SerializeField] private TextMeshPro counterText;
     [SerializeField] private Transform charactersParent;
 
