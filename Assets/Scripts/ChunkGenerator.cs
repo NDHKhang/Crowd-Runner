@@ -16,16 +16,14 @@ public class ChunkGenerator : MonoBehaviour
     private void GenerateChunks()
     {
         Vector3 chunkPos = Vector3.zero;
-        for (int i = 0; i < 5; i++)
+        for (int i = 0; i < chunksPrefab.Length; i++)
         {
-            Chunk chunkToCreate = chunksPrefab[Random.Range(0, chunksPrefab.Length)];
-
             // For ensuring the next chunk is place right after the previous chunk
             if (i > 0)
-                chunkPos.z += chunkToCreate.GetLength() / 2;
+                chunkPos.z += chunksPrefab[i].GetLength() / 2;
 
-            Instantiate(chunkToCreate, chunkPos, Quaternion.identity);
-            chunkPos.z += chunkToCreate.GetLength() / 2;
+            Instantiate(chunksPrefab[i], chunkPos, Quaternion.identity, transform);
+            chunkPos.z += chunksPrefab[i].GetLength() / 2;
         }
     }
 }

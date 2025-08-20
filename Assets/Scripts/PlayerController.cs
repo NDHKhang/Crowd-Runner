@@ -6,7 +6,7 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     [Header("References")]
-    [SerializeField] private CrowdArranger crowdArranger;
+    [SerializeField] private CrowdSystem crowdArranger;
 
     [Header("Settings")]
     [SerializeField] private float moveSpeed;
@@ -54,6 +54,7 @@ public class PlayerController : MonoBehaviour
             Vector3 position = transform.position;
             position.x = clickedPlayerpos.x + xScreenDifference * slideSpeed;
 
+            // Clamp the x position prevent player go out of boundary
             position.x = Mathf.Clamp(position.x, -roadWidth / 2 + crowdArranger.GetCrowdRadius(),
                 roadWidth / 2 - crowdArranger.GetCrowdRadius());
 
