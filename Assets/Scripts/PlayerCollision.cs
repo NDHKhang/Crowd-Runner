@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerCollision : MonoBehaviour
 {
@@ -28,6 +29,11 @@ public class PlayerCollision : MonoBehaviour
                 DoorType doorType = doors.GetDoorType(transform.position.x);
 
                 crowdArranger.ApplyAmount(doorType, doorAmount);
+            }
+            else if (detectColliders[i].CompareTag("Finish"))
+            {
+                Debug.Log("Finish");
+                SceneManager.LoadScene(0);
             }
         }
     }

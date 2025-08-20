@@ -561,12 +561,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a23876263fb13bb43b8901582316501e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  chunksPrefab:
+  levelChunk:
   - {fileID: 2381728099715380985, guid: e19b0057d73e50b4bbf0d4b3020236fc, type: 3}
   - {fileID: 6012309586390867444, guid: c4c85b6400bd922469ca574987530fd7, type: 3}
+  - {fileID: 96101404490061688, guid: 422566e868200d34fae16f7bd15ae6d4, type: 3}
   - {fileID: 1363767922338322848, guid: 6e5fc05dcfcc5444c98e26d1e0be0242, type: 3}
   - {fileID: 96101404490061688, guid: 422566e868200d34fae16f7bd15ae6d4, type: 3}
   - {fileID: 1937711067213298422, guid: 055c046f19c99784ba525c51c25adb14, type: 3}
+  - {fileID: 2381728099715380985, guid: c5c2ae2246ef56a4c9f2ea536c3c0e90, type: 3}
 --- !u!1 &1153304994
 GameObject:
   m_ObjectHideFlags: 0
