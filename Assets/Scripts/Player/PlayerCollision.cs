@@ -32,7 +32,8 @@ public class PlayerCollision : MonoBehaviour
             }
             else if (detectColliders[i].CompareTag("Finish"))
             {
-                Debug.Log("Finish");
+                PlayerPrefs.SetInt("level", ChunkManager.instance.GetLevel() + 1);
+
                 SceneManager.LoadScene(0);
             }
         }

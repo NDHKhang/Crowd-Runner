@@ -5,8 +5,11 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
+    public static PlayerController instance;
+
     [Header("References")]
     [SerializeField] private CrowdSystem crowdArranger;
+    [SerializeField] private PlayerAnimator playerAnimator;
 
     [Header("Settings")]
     [SerializeField] private float moveSpeed;
@@ -17,17 +20,53 @@ public class PlayerController : MonoBehaviour
     private Vector3 clickedScreenpos;
     private Vector3 clickedPlayerpos;
 
+    private bool canMove = false;
+
+    private void Awake()
+    {
+        if (instance != null)
+            Destroy(instance);
+        else
+            instance = this;
+    }
+
     // Start is called before the first frame update
     void Start()
     {
-        
+        GameManager.onGameStateChange += GameStateChangedCallBack;
+    }
+
+    private void OnDestroy()
+    {
+        GameManager.onGameStateChange -= GameStateChangedCallBack;
     }
 
     // Update is called once per frame
     void Update()
     {
-        MoveForward();
-        ManageControl();
+        if (canMove)
+        {
+            MoveForward();
+            ManageControl();
+        }
+    }
+
+    private void GameStateChangedCallBack(GameManager.GameState gameState)
+    {
+        if (gameState == GameManager.GameState.Game)
+            StartMoving();
+    }
+
+    private void StartMoving()
+    {
+        canMove = true;
+        playerAnimator.Run();
+    }
+
+    private void StopMoving()
+    {
+        canMove = false;
+        playerAnimator.Idle();
     }
 
     private void MoveForward()
