@@ -86,8 +86,19 @@ public class Doors : MonoBehaviour
             return rightDoorType;
     }
 
-    public void Disable()
+    public void Disable(float xPos)
     {
+        if (xPos < 0)
+        {
+            leftDoorRenderer.enabled = false;
+            leftDoorText.enabled = false;
+        }
+        else
+        {
+            rightDoorRenderer.enabled = false;
+            rightDoorText.enabled = false;
+        }
+
         doorCollider.enabled = false;
     }
 }

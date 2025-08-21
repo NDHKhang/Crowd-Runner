@@ -23,7 +23,7 @@ public class PlayerCollision : MonoBehaviour
             if (detectColliders[i].TryGetComponent(out Doors doors))
             {
                 // Prevent re-triggering by disabling the door
-                doors.Disable();
+                doors.Disable(transform.position.x);
 
                 int doorAmount = doors.GetDoorAmount(transform.position.x);
                 DoorType doorType = doors.GetDoorType(transform.position.x);
