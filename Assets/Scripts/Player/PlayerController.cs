@@ -12,11 +12,11 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private PlayerAnimator playerAnimator;
 
     [Header("Settings")]
-    [SerializeField] private float moveSpeed;
+    [SerializeField] private float moveSpeed = 10f;
     [SerializeField] private float roadWidth;
 
     [Header("Controller")]
-    [SerializeField] private float slideSpeed;
+    [SerializeField] private float slideSpeed = 8f;
     private Vector3 clickedScreenpos;
     private Vector3 clickedPlayerpos;
 

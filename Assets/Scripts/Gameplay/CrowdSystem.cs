@@ -17,18 +17,18 @@ public class CrowdSystem : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        PlaceCharacters();
+        PlaceRunners();
     }
 
-    private void PlaceCharacters()
+    private void PlaceRunners()
     {
         for (int i = 0; i < charactersParent.childCount; i++)
         {
-            charactersParent.GetChild(i).localPosition = GetCharacterLocalPos(i);
+            charactersParent.GetChild(i).localPosition = GetRunnerLocalPos(i);
         }
     }
 
-    private Vector3 GetCharacterLocalPos(int index)
+    private Vector3 GetRunnerLocalPos(int index)
     {
         // // Calculate coordinate using Fermat's spiral formula and polar-to-Cartesian conversion
         float x = radius * Mathf.Sqrt(index) * Mathf.Cos(Mathf.Deg2Rad * index * angle);

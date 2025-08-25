@@ -22,6 +22,9 @@ public class CrowdCounter : MonoBehaviour
     {
         UpdateCounterHeight();
         UpdateCounterText();
+
+        if (charactersParent.childCount <= 0)
+            Destroy(gameObject);
     }
 
     private void UpdateCounterHeight()

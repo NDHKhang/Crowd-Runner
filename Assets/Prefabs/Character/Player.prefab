@@ -528,6 +528,8 @@ GameObject:
   m_Component:
   - component: {fileID: 7009078310842115660}
   - component: {fileID: 7873354123828651840}
+  - component: {fileID: -6379327431414707161}
+  - component: {fileID: 1472909449069825330}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -573,6 +575,41 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &-6379327431414707161
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1656884253556796753}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f118335c15616474d8c99a6037adbb50, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!136 &1472909449069825330
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1656884253556796753}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 87.30138
+  m_Height: 247.92395
+  m_Direction: 1
+  m_Center: {x: 2.3880618, y: 107.398544, z: 7.979217}
 --- !u!1 &1921165738160704863
 GameObject:
   m_ObjectHideFlags: 0
