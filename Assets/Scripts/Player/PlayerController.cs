@@ -22,6 +22,8 @@ public class PlayerController : MonoBehaviour
 
     private bool canMove = false;
 
+    public bool CanMove { get { return canMove; } set { canMove = value; } }
+
     private void Awake()
     {
         if (instance != null)

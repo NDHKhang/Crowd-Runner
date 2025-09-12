@@ -10,27 +10,121 @@ public class EnemyGroup : MonoBehaviour
 
     [Header("Settings")]
     [SerializeField] private int amount;
+    [SerializeField] private float searchRadius = 5f;
+    [SerializeField] private bool hasTrigger = false;
 
-    [Header("Settings")]
+
+    [Header("Spawn Settings")]
     [SerializeField] private float radius = 0.5f;
     [SerializeField] private float angle = 137.508f; // 137.508 is golden angle
+
+    private Transform runnerParent;
+    private List<Enemy> enemies = new List<Enemy>();
+
+    private bool isInCombat = false;
 
     // Start is called before the first frame update
     void Start()
     {
+        runnerParent = GameObject.FindWithTag("Player").transform;
         GenerateEnemies();
     }
 
+    private void Update()
+    {
+        if (hasTrigger) return;
+        FindTarget();
+    }
+
+    // Checking if runner is in the search radius
+    private void FindTarget()
+    {
+        Collider[] detectColliders = Physics.OverlapSphere(transform.position, searchRadius);
+
+        for (int i = 0; i < detectColliders.Length; i++)
+        {
+            if (detectColliders[i].TryGetComponent<Runner>(out _))
+            {
+                hasTrigger = true;
+                TriggerEnemies(); // Trigger enemies to chase
+                OnCombatStart();
+                return;
+            }
+        }
+    }
+
+    private void TriggerEnemies()
+    {
+        List<Transform> allRunners = FindAllRunners();
+
+        for (int i = 0; i < enemies.Count && i < allRunners.Count; i++)
+        {
+            Enemy enemy = enemies[i];
+            Transform runner = allRunners[i].transform;
+
+            if (enemy != null)
+                enemy.StartChasing(runner);
+        }
+
+        // Exception: If there are more enemies than available runners
+        for (int i = allRunners.Count; i < enemies.Count; i++)
+        {
+            Enemy enemy = enemies[i];
+
+            if (enemy != null)
+                enemy.StartChasing(runnerParent);
+        }
+
+        isInCombat = true;
+    }
+
+    private List<Transform> FindAllRunners()
+    {
+        List<Transform> allRunners = new List<Transform>();
+
+        for(int i = 0; i < runnerParent.childCount; i++)
+        {
+            allRunners.Add(runnerParent.GetChild(i));
+        }
+
+        return allRunners;
+    }
 
     private void GenerateEnemies()
     {
+        enemies.Clear();
+
         for (int i = 0; i < amount; i++)
         {
             Vector3 enemyLocalPos = GetRunnerLocalPos(i);
             Vector3 enemyWorldPos = enemiesParent.TransformPoint(enemyLocalPos);
 
-            Instantiate(enemyPrefab, enemyWorldPos, Quaternion.Euler(0, 180, 0), enemiesParent);
+            Enemy enemy = Instantiate(enemyPrefab, enemyWorldPos, Quaternion.Euler(0, 180, 0), enemiesParent);
+
+            enemies.Add(enemy);
         }
+    }
+
+    public void OnEnemyDestroyed(Enemy enemy)
+    {
+        if (enemies.Contains(enemy))
+            enemies.Remove(enemy);
+
+        if(enemies.Count == 0 && isInCombat)
+        {
+            isInCombat = false;
+            OnCombatEnd();
+        }
+    }
+
+    private void OnCombatStart()
+    {
+        PlayerController.instance.CanMove = false;
+    }
+
+    private void OnCombatEnd()
+    {
+        PlayerController.instance.CanMove = true;
     }
 
     private Vector3 GetRunnerLocalPos(int index)
@@ -40,5 +134,11 @@ public class EnemyGroup : MonoBehaviour
         float z = radius * Mathf.Sqrt(index) * Mathf.Sin(Mathf.Deg2Rad * index * angle);
 
         return new Vector3(x, 0, z);
+    }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(transform.position, searchRadius);
     }
 }

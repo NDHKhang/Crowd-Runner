@@ -12,11 +12,14 @@ public class Enemy : MonoBehaviour
     [SerializeField] private float moveSpeed = 10f;
     private State state;
     private Transform targetRunner;
+    private EnemyGroup enemyGroup;
 
     // Start is called before the first frame update
     void Start()
     {
         state = State.Idle;
+
+        enemyGroup = GetComponentInParent<EnemyGroup>();
     }
 
     // Update is called once per frame
@@ -30,7 +33,7 @@ public class Enemy : MonoBehaviour
         switch (state)
         {
             case State.Idle:
-                FindTarget();
+                //FindTarget();
                 break;
             case State.Running:
                 RunToTarget();
@@ -59,6 +62,19 @@ public class Enemy : MonoBehaviour
         }
     }
 
+    public void StartChasing(Transform target)
+    {
+        if (target.TryGetComponent(out Runner runner))
+        {
+            if (runner.IsTarget)
+                return;
+
+            runner.IsTarget = true;
+        }
+        targetRunner = target;
+        EnterRunningState();
+    }
+
     private void EnterRunningState()
     {
         state = State.Running;
@@ -74,8 +90,12 @@ public class Enemy : MonoBehaviour
 
         if (Vector3.Distance(transform.position, targetRunner.transform.position) < 0.2f)
         {
-            Destroy(targetRunner.gameObject);
-            Destroy(gameObject);
+            if(targetRunner.TryGetComponent(out Runner runner))
+            {
+                enemyGroup.OnEnemyDestroyed(this);
+                Destroy(targetRunner.gameObject);
+                Destroy(gameObject);
+            }
         }
     }
 }
