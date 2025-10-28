@@ -24,8 +24,9 @@ public class SettingManager : MonoBehaviour
 
     private void Awake()
     {
-        soundState = PlayerPrefs.GetInt(SOUNDS_KEY, 1) == 1;
-        vibrationState = PlayerPrefs.GetInt(VIBRATION_KEY, 1) == 1;
+        // For the first time in game
+        soundState = SaveLoadManager.LoadInt(SOUNDS_KEY, 1) == 1;
+        vibrationState = SaveLoadManager.LoadInt(VIBRATION_KEY, 1) == 1;
     }
 
     private void Start()
@@ -56,7 +57,7 @@ public class SettingManager : MonoBehaviour
         soundState = !soundState;
 
         // 0: sounds off, 1: sounds on
-        PlayerPrefs.SetInt(SOUNDS_KEY, soundState ? 1 : 0);
+        SaveLoadManager.SaveInt(SOUNDS_KEY, soundState ? 1 : 0);
     }
 
     private void EnableSounds()
@@ -81,7 +82,7 @@ public class SettingManager : MonoBehaviour
         vibrationState = !vibrationState;
 
         // 0: sounds off, 1: sounds on
-        PlayerPrefs.SetInt(VIBRATION_KEY, vibrationState ? 1 : 0);
+        SaveLoadManager.SaveInt(VIBRATION_KEY, vibrationState ? 1 : 0);
     }
 
     private void EnableVibration()

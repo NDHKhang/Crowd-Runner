@@ -17,6 +17,19 @@ public class UIManager : MonoBehaviour
 
     [SerializeField] private Slider progressBar;
     [SerializeField] private TextMeshProUGUI levelText;
+    [SerializeField] private TextMeshProUGUI[] coinsText;
+
+    private void OnEnable()
+    {
+        GameManager.onGameStateChange += GameStateChangedCallback;
+        DataManager.onCoinsChanged += UpdateCoinsText;
+    }
+
+    private void OnDisable()
+    {
+        GameManager.onGameStateChange -= GameStateChangedCallback;
+        DataManager.onCoinsChanged += UpdateCoinsText;
+    }
 
     // Start is called before the first frame update
     void Start()
@@ -39,14 +52,7 @@ public class UIManager : MonoBehaviour
         settingsPanel.SetActive(false);
 
         // "+1" because the index start at 0
-        levelText.text = "Level " + (ChunkManager.instance.GetLevel() + 1);
-
-        GameManager.onGameStateChange += GameStateChangedCallback;
-    }
-
-    private void OnDestroy()
-    {
-        GameManager.onGameStateChange -= GameStateChangedCallback;
+        levelText.text = "Level " + (ChunkManager.instance.GetLevel() + 1);     
     }
 
     private void GameStateChangedCallback(GameManager.GameState gameState)
@@ -99,5 +105,13 @@ public class UIManager : MonoBehaviour
     public void HideSettingsPanel()
     {
         settingsPanel.SetActive(false);
+    }
+
+    private void UpdateCoinsText(int coins)
+    {
+        foreach (TextMeshProUGUI coinText in coinsText)
+        {
+            coinText.text = coins.ToString();
+        }
     }
 }

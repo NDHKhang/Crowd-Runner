@@ -15,7 +15,7 @@ public class SoundManager : MonoBehaviour
     private const string MASTER_VOLUME = "MasterVolume";
 
     // Start is called before the first frame update
-    void Start()
+    void OnEnable()
     {
         PlayerCollision.onDoorHit += PlayDoorHitSound;
         Enemy.onEnemyDead += PlayRunnerDieSound;
@@ -23,7 +23,7 @@ public class SoundManager : MonoBehaviour
         GameManager.onGameStateChange += GameStateChangedCallBack;
     }
 
-    private void OnDestroy()
+    private void OnDisable()
     {
         PlayerCollision.onDoorHit -= PlayDoorHitSound;
         Enemy.onEnemyDead -= PlayRunnerDieSound;

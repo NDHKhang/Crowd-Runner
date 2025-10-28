@@ -40,9 +40,11 @@ public class PlayerCollision : MonoBehaviour
             }
             else if (detectColliders[i].CompareTag("Finish"))
             {
-                PlayerPrefs.SetInt("level", ChunkManager.instance.GetLevel() + 1);
-
+                // Update level, state and add coin when finish
+                SaveLoadManager.SaveInt("level", ChunkManager.instance.GetLevel() + 1);
                 GameManager.instance.SetGameState(GameManager.GameState.LevelComplete);
+
+                DataManager.instance.AddCoins(10);
             }
         }
     }

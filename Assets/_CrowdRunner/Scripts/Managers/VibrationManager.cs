@@ -10,7 +10,7 @@ public class VibrationManager : MonoBehaviour
     private bool isVibrationOn = true;
 
     // Start is called before the first frame update
-    void Start()
+    void OnEnable()
     {
         PlayerCollision.onDoorHit += Vibrate;
         Enemy.onEnemyDead += Vibrate;
@@ -18,7 +18,7 @@ public class VibrationManager : MonoBehaviour
         GameManager.onGameStateChange += GameStateChangedCallback;
     }
 
-    private void OnDestroy()
+    private void OnDisable()
     {
         PlayerCollision.onDoorHit -= Vibrate;
         Enemy.onEnemyDead -= Vibrate;

@@ -32,7 +32,7 @@ public class PlayerController : MonoBehaviour
     }
 
     // Start is called before the first frame update
-    void Start()
+    void OnEnable()
     {
         EnemyGroup.OnCombatStart += LockMovement;
         EnemyGroup.OnCombatEnd += StartMoving;
@@ -40,7 +40,7 @@ public class PlayerController : MonoBehaviour
         GameManager.onGameStateChange += GameStateChangedCallBack;
     }
 
-    private void OnDestroy()
+    private void OnDisable()
     {
         EnemyGroup.OnCombatStart -= LockMovement;
         EnemyGroup.OnCombatEnd -= StartMoving;

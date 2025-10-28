@@ -79,6 +79,6 @@ public class ChunkManager : MonoBehaviour
 
     public int GetLevel()
     {
-        return PlayerPrefs.GetInt("level", 0);
+        return SaveLoadManager.LoadInt("level", 0);
     }
 }
