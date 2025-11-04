@@ -1,15 +1,13 @@
+using Solo.MOST_IN_ONE;
 using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using CandyCoded.HapticFeedback;
 using UnityEngine.UI;
+using static Solo.MOST_IN_ONE.MOST_HapticFeedback;
 
 public class VibrationManager : MonoBehaviour
 {
-    private bool isVibrationOn = true;
-
-    // Start is called before the first frame update
     void OnEnable()
     {
         PlayerCollision.onDoorHit += Vibrate;
@@ -28,11 +26,7 @@ public class VibrationManager : MonoBehaviour
 
     private void Vibrate()
     {
-        if (isVibrationOn)
-        {
-            Debug.Log("Vibrate");
-            HapticFeedback.LightFeedback();
-        }
+        MOST_HapticFeedback.Generate(MOST_HapticFeedback.HapticTypes.LightImpact);
     }
 
     private void GameStateChangedCallback(GameManager.GameState state)
@@ -45,11 +39,11 @@ public class VibrationManager : MonoBehaviour
 
     public void EnableVibration()
     {
-        isVibrationOn = true;
+        MOST_HapticFeedback.HapticsEnabled = true;
     }
 
     public void DisableVibration()
     {
-        isVibrationOn = false;
+        MOST_HapticFeedback.HapticsEnabled = false;
     }
 }

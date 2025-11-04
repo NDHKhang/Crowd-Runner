@@ -18,6 +18,8 @@ public class GameManager : MonoBehaviour
             Destroy(instance);
         else
             instance = this;
+
+        Application.targetFrameRate = (int)Screen.currentResolution.refreshRateRatio.value;
     }
 
     public void SetGameState(GameState gameState)
