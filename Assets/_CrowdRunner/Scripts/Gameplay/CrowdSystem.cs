@@ -6,13 +6,33 @@ using UnityEngine;
 public class CrowdSystem : MonoBehaviour
 {
     [Header("References")]
-    [SerializeField] private Transform charactersParent;
+    [SerializeField] private Transform runnerParent;
     [SerializeField] private GameObject characterPrefab;
     [SerializeField] private PlayerAnimator playerAnimator;
 
     [Header("Settings")]
     [SerializeField] private float radius = 0.5f;
     [SerializeField] private float angle = 137.508f; // 137.508 is golden angle
+
+    [Header("Events")]
+    public static Action<int> onLevelCompleteRunnerCount;
+
+    private void OnEnable()
+    {
+        DataManager.onRunnersLevelChanged += SpawnRunners;
+        GameManager.onGameStateChanged += onGameStateChangedCallback;
+    }
+
+    private void OnDisable()
+    {
+        DataManager.onRunnersLevelChanged -= SpawnRunners;
+        GameManager.onGameStateChanged -= onGameStateChangedCallback;
+    }
+
+    private void Start()
+    {
+        SpawnRunners(DataManager.instance.StartingRunnersLevel);
+    }
 
     // Update is called once per frame
     void Update()
@@ -22,15 +42,30 @@ public class CrowdSystem : MonoBehaviour
         if (!GameManager.instance.IsGameState())
             return;
 
-        if (charactersParent.childCount <= 0)
+        if (runnerParent.childCount <= 0)
             GameManager.instance.SetGameState(GameManager.GameState.GameOver);
     }
 
+    private void onGameStateChangedCallback(GameManager.GameState state)
+    {
+        if (state == GameManager.GameState.LevelComplete)
+            onLevelCompleteRunnerCount?.Invoke(runnerParent.childCount);
+    }
+
+    private void SpawnRunners(int amount)
+    {
+        int currentCount = runnerParent.childCount;
+        int runnerToAdd = amount - currentCount; //only spawn the extra runners
+
+        if(runnerToAdd > 0)
+            AddRunner(runnerToAdd, false); // Spawn the runners with idle animation
+    }
+    
     private void PlaceRunners()
     {
-        for (int i = 0; i < charactersParent.childCount; i++)
+        for (int i = 0; i < runnerParent.childCount; i++)
         {
-            charactersParent.GetChild(i).localPosition = GetRunnerLocalPos(i);
+            runnerParent.GetChild(i).localPosition = GetRunnerLocalPos(i);
         }
     }
 
@@ -45,7 +80,7 @@ public class CrowdSystem : MonoBehaviour
 
     public float GetCrowdRadius()
     {
-        return radius * Mathf.Sqrt(charactersParent.childCount);
+        return radius * Mathf.Sqrt(runnerParent.childCount);
     }
 
     public void ApplyAmount(DoorType doorType, int amount)
@@ -53,38 +88,39 @@ public class CrowdSystem : MonoBehaviour
         switch (doorType)
         {
             case DoorType.Addition:
-                AddCharacter(amount);
+                AddRunner(amount);
                 break;
             case DoorType.Subtraction:
-                RemoverRunner(amount);
+                RemoveRunner(amount);
                 break;
             case DoorType.Multiplication:
-                int characterToAdd = (charactersParent.childCount * amount) - charactersParent.childCount;
-                AddCharacter(characterToAdd);
+                int characterToAdd = (runnerParent.childCount * amount) - runnerParent.childCount;
+                AddRunner(characterToAdd);
                 break;
         }
     }
 
-    private void AddCharacter(int amount)
+    private void AddRunner(int amount, bool triggerAnimation = true)
     {
         for (int i = 0; i < amount; i++)
         {
-            Instantiate(characterPrefab, charactersParent);
+            Instantiate(characterPrefab, runnerParent);
         }
 
-        playerAnimator.Run();
+        if(triggerAnimation)
+            playerAnimator.Run();
     }
 
-    private void RemoverRunner(int amount)
+    private void RemoveRunner(int amount)
     {
         // Clamp to avoid resulting in 0 characters
-        if (amount >= charactersParent.childCount)
-            amount = charactersParent.childCount - 1;
+        if (amount >= runnerParent.childCount)
+            amount = runnerParent.childCount - 1;
 
-        int characterAmount = charactersParent.childCount;
+        int characterAmount = runnerParent.childCount;
         for (int i = characterAmount - 1; i >= characterAmount - amount; i--)
         {
-            Transform characterToDestroy = charactersParent.GetChild(i);
+            Transform characterToDestroy = runnerParent.GetChild(i);
             characterToDestroy.SetParent(null);
             Destroy(characterToDestroy.gameObject);
         }

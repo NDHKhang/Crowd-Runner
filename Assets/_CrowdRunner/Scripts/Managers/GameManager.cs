@@ -10,7 +10,7 @@ public class GameManager : MonoBehaviour
 
     private GameState gameState;
 
-    public static Action<GameState> onGameStateChange;
+    public static Action<GameState> onGameStateChanged;
 
     private void Awake()
     {
@@ -23,7 +23,7 @@ public class GameManager : MonoBehaviour
     public void SetGameState(GameState gameState)
     {
         this.gameState = gameState;
-        onGameStateChange?.Invoke(gameState);
+        onGameStateChanged?.Invoke(gameState);
     }
 
     public bool IsGameState()

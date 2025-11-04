@@ -43,8 +43,6 @@ public class PlayerCollision : MonoBehaviour
                 // Update level, state and add coin when finish
                 SaveLoadManager.SaveInt("level", ChunkManager.instance.GetLevel() + 1);
                 GameManager.instance.SetGameState(GameManager.GameState.LevelComplete);
-
-                DataManager.instance.AddCoins(10);
             }
         }
     }

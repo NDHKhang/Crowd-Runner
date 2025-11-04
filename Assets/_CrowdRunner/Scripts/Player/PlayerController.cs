@@ -37,7 +37,7 @@ public class PlayerController : MonoBehaviour
         EnemyGroup.OnCombatStart += LockMovement;
         EnemyGroup.OnCombatEnd += StartMoving;
 
-        GameManager.onGameStateChange += GameStateChangedCallBack;
+        GameManager.onGameStateChanged += GameStateChangedCallBack;
     }
 
     private void OnDisable()
@@ -45,7 +45,7 @@ public class PlayerController : MonoBehaviour
         EnemyGroup.OnCombatStart -= LockMovement;
         EnemyGroup.OnCombatEnd -= StartMoving;
 
-        GameManager.onGameStateChange -= GameStateChangedCallBack;
+        GameManager.onGameStateChanged -= GameStateChangedCallBack;
     }
 
     // Update is called once per frame

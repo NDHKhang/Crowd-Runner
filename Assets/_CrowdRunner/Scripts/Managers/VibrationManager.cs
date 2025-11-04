@@ -15,7 +15,7 @@ public class VibrationManager : MonoBehaviour
         PlayerCollision.onDoorHit += Vibrate;
         Enemy.onEnemyDead += Vibrate;
 
-        GameManager.onGameStateChange += GameStateChangedCallback;
+        GameManager.onGameStateChanged += GameStateChangedCallback;
     }
 
     private void OnDisable()
@@ -23,7 +23,7 @@ public class VibrationManager : MonoBehaviour
         PlayerCollision.onDoorHit -= Vibrate;
         Enemy.onEnemyDead -= Vibrate;
 
-        GameManager.onGameStateChange -= GameStateChangedCallback;
+        GameManager.onGameStateChanged -= GameStateChangedCallback;
     }
 
     private void Vibrate()

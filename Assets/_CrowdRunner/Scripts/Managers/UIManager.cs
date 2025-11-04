@@ -8,27 +8,33 @@ using UnityEngine.UI;
 
 public class UIManager : MonoBehaviour
 {
-    [Header("References")]
-    [SerializeField] private GameObject menuPanel;
-    [SerializeField] private GameObject gamePanel;
-    [SerializeField] private GameObject gameOverPanel;
-    [SerializeField] private GameObject levelCompletePanel;
-    [SerializeField] private GameObject settingsPanel;
+    public static UIManager instance;
 
-    [SerializeField] private Slider progressBar;
-    [SerializeField] private TextMeshProUGUI levelText;
-    [SerializeField] private TextMeshProUGUI[] coinsText;
+    [Header("References")]
+    [SerializeField] private MenuUI menuUI;
+    [SerializeField] private GameUI gameUI;
+    [SerializeField] private GameOverUI gameOverUI;
+    [SerializeField] private LevelCompleteUI levelCompleteUI;
+    [SerializeField] private SettingsUI settingsUI;
+    [SerializeField] private GameObject crowdCounterBubble;
+
+
+    private void Awake()
+    {
+        if (instance != null)
+            Destroy(instance);
+        else
+            instance = this;
+    }
 
     private void OnEnable()
     {
-        GameManager.onGameStateChange += GameStateChangedCallback;
-        DataManager.onCoinsChanged += UpdateCoinsText;
+        GameManager.onGameStateChanged += GameStateChangedCallback;
     }
 
     private void OnDisable()
     {
-        GameManager.onGameStateChange -= GameStateChangedCallback;
-        DataManager.onCoinsChanged += UpdateCoinsText;
+        GameManager.onGameStateChanged -= GameStateChangedCallback;
     }
 
     // Start is called before the first frame update
@@ -37,81 +43,52 @@ public class UIManager : MonoBehaviour
         Init();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        UpdateProgressBar();
-    }
-
     private void Init()
     {
-        progressBar.value = 0;
-        gamePanel.SetActive(false);
-        gameOverPanel.SetActive(false);
-        levelCompletePanel.SetActive(false);
-        settingsPanel.SetActive(false);
-
-        // "+1" because the index start at 0
-        levelText.text = "Level " + (ChunkManager.instance.GetLevel() + 1);     
+        menuUI.Show();
+        gameUI.Show();
+        gameOverUI.Hide();
+        levelCompleteUI.Hide();
+        settingsUI.Hide();
+        crowdCounterBubble.SetActive(false);
     }
 
     private void GameStateChangedCallback(GameManager.GameState gameState)
     {
-        if (gameState == GameManager.GameState.GameOver)
+        if (gameState == GameManager.GameState.Game)
+            crowdCounterBubble.SetActive(true);
+        else if (gameState == GameManager.GameState.GameOver)
             ShowGameOver();
         else if (gameState == GameManager.GameState.LevelComplete)
             ShowLevelComplete();
     }
 
-    public void PlayButtonPressed()
+    public void StartGame()
     {
         GameManager.instance.SetGameState(GameManager.GameState.Game);
 
-        menuPanel.SetActive(false);
-        gamePanel.SetActive(true);
-    }
-
-    public void RetryButtonPressed()
-    {
-        SceneManager.LoadScene(0);
+        menuUI.Hide();
     }
 
     public void ShowGameOver()
     {
-        gamePanel.SetActive(false);
-        gameOverPanel.SetActive(true);
+        gameUI.Hide();
+        gameOverUI.Show();
     }
 
     public void ShowLevelComplete()
     {
-        gamePanel.SetActive(false);
-        levelCompletePanel.SetActive(true);
+        gameUI.Hide();
+        levelCompleteUI.Show();
     }
 
-    public void UpdateProgressBar()
+    public void ShowSettings()
     {
-        if (!GameManager.instance.IsGameState())
-            return;
-
-        float progress = PlayerController.instance.transform.position.z / ChunkManager.instance.GetFinishZ();
-        progressBar.value = progress;
+        settingsUI.Show();
     }
 
-    public void ShowSettingsPanel()
+    public void HideSettings()
     {
-        settingsPanel.SetActive(true);
-    }
-
-    public void HideSettingsPanel()
-    {
-        settingsPanel.SetActive(false);
-    }
-
-    private void UpdateCoinsText(int coins)
-    {
-        foreach (TextMeshProUGUI coinText in coinsText)
-        {
-            coinText.text = coins.ToString();
-        }
+        settingsUI.Hide();
     }
 }
