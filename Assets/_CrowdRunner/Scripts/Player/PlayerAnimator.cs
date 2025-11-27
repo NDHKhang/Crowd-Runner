@@ -11,7 +11,7 @@ public class PlayerAnimator : MonoBehaviour
     {
         for (int i = 0; i < charactersParent.childCount; i++)
         {
-            Animator animator = charactersParent.GetChild(i).GetComponent<Animator>();
+            Animator animator = charactersParent.GetChild(i).GetComponent<Runner>().GetAnimator();
 
             animator.Play("Run");
         }
@@ -21,7 +21,7 @@ public class PlayerAnimator : MonoBehaviour
     {
         for (int i = 0; i < charactersParent.childCount; i++)
         {
-            Animator animator = charactersParent.GetChild(i).GetComponent<Animator>();
+            Animator animator = charactersParent.GetChild(i).GetComponent<Runner>().GetAnimator();
 
             animator.Play("Idle");
         }

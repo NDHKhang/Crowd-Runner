@@ -2,10 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerController : MonoBehaviour
+public class PlayerController : Singleton<PlayerController>
 {
-    public static PlayerController instance;
-
     [Header("References")]
     [SerializeField] private CrowdSystem crowdArranger;
     [SerializeField] private PlayerAnimator playerAnimator;
@@ -22,14 +20,6 @@ public class PlayerController : MonoBehaviour
     private bool canMove = false;
 
     public bool CanMove { get { return canMove; } set { canMove = value; } }
-
-    private void Awake()
-    {
-        if (instance != null)
-            Destroy(instance);
-        else
-            instance = this;
-    }
 
     // Start is called before the first frame update
     void OnEnable()

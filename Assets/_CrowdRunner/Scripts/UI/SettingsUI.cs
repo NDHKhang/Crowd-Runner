@@ -20,6 +20,6 @@ public class SettingsUI : MonoBehaviour
 
     public void OnClosedPressed()
     {
-        UIManager.instance.HideSettings();
+        UIManager.Instance.HideSettings();
     }
 }

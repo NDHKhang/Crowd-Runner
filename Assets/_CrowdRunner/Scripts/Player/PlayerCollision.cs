@@ -15,7 +15,7 @@ public class PlayerCollision : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(GameManager.instance.IsGameState())
+        if(GameManager.Instance.IsGameState())
             HandleDoorCollision();    
     }
 
@@ -41,8 +41,8 @@ public class PlayerCollision : MonoBehaviour
             else if (detectColliders[i].CompareTag("Finish"))
             {
                 // Update level, state and add coin when finish
-                SaveLoadManager.SaveInt("level", ChunkManager.instance.GetLevel() + 1);
-                GameManager.instance.SetGameState(GameManager.GameState.LevelComplete);
+                SaveLoadManager.SaveInt("level", ChunkManager.Instance.GetLevel() + 1);
+                GameManager.Instance.SetGameState(GameManager.GameState.LevelComplete);
             }
         }
     }

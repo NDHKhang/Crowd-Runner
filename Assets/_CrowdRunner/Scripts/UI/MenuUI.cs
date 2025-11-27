@@ -20,12 +20,14 @@ public class MenuUI : MonoBehaviour
     {
         DataManager.onRunnersLevelChanged += UpdateRunnersLevel;
         DataManager.onIncomeLevelChanged += UpdateIncomeLevel;
+        DataManager.onCoinsChanged += UpdateButtonStates;
     }
 
     private void OnDisable()
     {
         DataManager.onRunnersLevelChanged -= UpdateRunnersLevel;
         DataManager.onIncomeLevelChanged -= UpdateIncomeLevel;
+        DataManager.onCoinsChanged -= UpdateButtonStates;
     }
 
     void Start()
@@ -35,9 +37,9 @@ public class MenuUI : MonoBehaviour
 
     private void Init()
     {
-        UpdateButtonStates(DataManager.instance.Coins);
-        UpdateRunnersLevel(DataManager.instance.StartingRunnersLevel);
-        UpdateIncomeLevel(DataManager.instance.IncomeLevel);
+        UpdateButtonStates(DataManager.Instance.Coins);
+        UpdateRunnersLevel(DataManager.Instance.StartingRunnersLevel);
+        UpdateIncomeLevel(DataManager.Instance.IncomeLevel);
     }
 
     public void Show()
@@ -52,48 +54,53 @@ public class MenuUI : MonoBehaviour
 
     public void OnPlayButtonPressed()
     {
-        UIManager.instance.StartGame();
+        UIManager.Instance.StartGame();
     }
 
     private void UpdateRunnersLevel(int level)
     {
-        int upgradeCost = DataManager.instance.GetUpgradeCost(level);
+        int upgradeCost = DataManager.Instance.GetUpgradeCost(level);
 
         runnersLevelText.text = level.ToString() + "\nLVL";
         runnersLevelCost.text = upgradeCost.ToString();
-        UpdateButtonStates(DataManager.instance.Coins);
+        UpdateButtonStates(DataManager.Instance.Coins);
     }
 
     private void UpdateIncomeLevel(int level)
     {
-        int upgradeCost = DataManager.instance.GetUpgradeCost(level);
+        int upgradeCost = DataManager.Instance.GetUpgradeCost(level);
 
         incomeLevelText.text = level.ToString() + "\nLVL";
         incomeLevelCost.text = upgradeCost.ToString();
-        UpdateButtonStates(DataManager.instance.Coins);
+        UpdateButtonStates(DataManager.Instance.Coins);
     }
 
     public void UpgradeRunnerButtonPressed()
     {
-        DataManager.instance.UpgradeStartingRunners();
+        DataManager.Instance.UpgradeStartingRunners();
     }
 
     public void UpgradeIncomeButtonPressed()
     {
-        DataManager.instance.UpgradeIncomeLevel();
+        DataManager.Instance.UpgradeIncomeLevel();
     }
 
     public void OnSettingsButtonPressed()
     {
-        UIManager.instance.ShowSettings();
+        UIManager.Instance.ShowSettings();
     }
 
     private void UpdateButtonStates(int coins)
     {
-        int runnersCost = DataManager.instance.GetUpgradeCost(DataManager.instance.StartingRunnersLevel);
-        int incomeCost = DataManager.instance.GetUpgradeCost(DataManager.instance.IncomeLevel);
+        int runnersCost = DataManager.Instance.GetUpgradeCost(DataManager.Instance.StartingRunnersLevel);
+        int incomeCost = DataManager.Instance.GetUpgradeCost(DataManager.Instance.IncomeLevel);
 
         upgradeRunnersButton.interactable = coins >= runnersCost;
         upgradeIncomeButton.interactable = coins >= incomeCost;
+    }
+
+    public void OnStoreButtonPressed()
+    {
+        UIManager.Instance.ShowStore();
     }
 }

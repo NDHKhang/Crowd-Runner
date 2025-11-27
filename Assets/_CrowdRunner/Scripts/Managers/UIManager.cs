@@ -6,26 +6,16 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public class UIManager : MonoBehaviour
+public class UIManager : Singleton<UIManager>
 {
-    public static UIManager instance;
-
     [Header("References")]
     [SerializeField] private MenuUI menuUI;
     [SerializeField] private GameUI gameUI;
     [SerializeField] private GameOverUI gameOverUI;
     [SerializeField] private LevelCompleteUI levelCompleteUI;
     [SerializeField] private SettingsUI settingsUI;
+    [SerializeField] private StoreUI storeUI;
     [SerializeField] private GameObject crowdCounterBubble;
-
-
-    private void Awake()
-    {
-        if (instance != null)
-            Destroy(instance);
-        else
-            instance = this;
-    }
 
     private void OnEnable()
     {
@@ -50,6 +40,7 @@ public class UIManager : MonoBehaviour
         gameOverUI.Hide();
         levelCompleteUI.Hide();
         settingsUI.Hide();
+        storeUI.Hide();
         crowdCounterBubble.SetActive(false);
     }
 
@@ -65,7 +56,7 @@ public class UIManager : MonoBehaviour
 
     public void StartGame()
     {
-        GameManager.instance.SetGameState(GameManager.GameState.Game);
+        GameManager.Instance.SetGameState(GameManager.GameState.Game);
 
         menuUI.Hide();
     }
@@ -90,5 +81,15 @@ public class UIManager : MonoBehaviour
     public void HideSettings()
     {
         settingsUI.Hide();
+    }
+
+    public void ShowStore()
+    {
+        storeUI.Show();
+    }
+
+    public void HideStore()
+    {
+        storeUI.Hide();
     }
 }

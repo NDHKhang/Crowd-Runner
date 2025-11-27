@@ -4,10 +4,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class DataManager : MonoBehaviour
+public class DataManager : Singleton<DataManager>
 {
-    public static DataManager instance;
-
     [Header("Event")]
     public static Action<int> onCoinsChanged;
     public static Action<int> onRunnersLevelChanged;
@@ -39,13 +37,13 @@ public class DataManager : MonoBehaviour
     [Tooltip("Max runner multiplier (prevents income from becoming too high")]
     [SerializeField] private float maxRunnersMultiplier = 5;
 
-    private void Awake()
-    {
-        if (instance != null)
-            Destroy(instance);
-        else
-            instance = this;
+    [Header("Ads Coin Reward")]
+    [SerializeField] private int rewardedAdsCoins = 250;
+    public int RewardedAdsCoin { get { return rewardedAdsCoins; } }
 
+    protected override void Awake()
+    {
+        base.Awake();
         coins = SaveLoadManager.LoadInt(COINS_KEY, startingCoins);
         startingRunnersLevel = SaveLoadManager.LoadInt(STARTING_RUNNERS_LEVEL_KEY, 1); // runner level starting at 1
         incomeLevel = SaveLoadManager.LoadInt(INCOME_LEVEL_KEY, 1); // income level starting at 1
@@ -80,6 +78,11 @@ public class DataManager : MonoBehaviour
         onCoinsChanged?.Invoke(coins);
 
         SaveLoadManager.SaveInt(COINS_KEY, coins);
+    }
+
+    public void AddRewardCoins()
+    {
+        AddCoins(rewardedAdsCoins);
     }
 
     public void WithDrawCoins(int amount)

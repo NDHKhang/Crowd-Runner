@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class LevelCompleteUI : MonoBehaviour
 {
@@ -36,7 +35,7 @@ public class LevelCompleteUI : MonoBehaviour
 
     public void OnNextButtonPressed()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        GameManager.Instance.ReloadScene();
     }
 
     private void UpdateCoinsText(int coins)

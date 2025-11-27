@@ -31,7 +31,7 @@ public class CrowdSystem : MonoBehaviour
 
     private void Start()
     {
-        SpawnRunners(DataManager.instance.StartingRunnersLevel);
+        SpawnRunners(DataManager.Instance.StartingRunnersLevel);
     }
 
     // Update is called once per frame
@@ -39,11 +39,11 @@ public class CrowdSystem : MonoBehaviour
     {
         PlaceRunners();
 
-        if (!GameManager.instance.IsGameState())
+        if (!GameManager.Instance.IsGameState())
             return;
 
         if (runnerParent.childCount <= 0)
-            GameManager.instance.SetGameState(GameManager.GameState.GameOver);
+            GameManager.Instance.SetGameState(GameManager.GameState.GameOver);
     }
 
     private void onGameStateChangedCallback(GameManager.GameState state)

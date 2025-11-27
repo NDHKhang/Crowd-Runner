@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class GameOverUI : MonoBehaviour
 {
@@ -13,17 +12,13 @@ public class GameOverUI : MonoBehaviour
 
     private void OnEnable()
     {
+        UpdateCoinsText(DataManager.Instance.Coins);
         DataManager.onCoinsChanged += UpdateCoinsText;
     }
 
     private void OnDisable()
     {
         DataManager.onCoinsChanged -= UpdateCoinsText;
-    }
-
-    void Start()
-    {
-        UpdateCoinsText(DataManager.instance.Coins);
     }
 
     public void Show()
@@ -38,7 +33,7 @@ public class GameOverUI : MonoBehaviour
 
     public void OnRetryButtonPressed()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        GameManager.Instance.ReloadScene();
     }
 
     private void UpdateCoinsText(int coins)

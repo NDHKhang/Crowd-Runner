@@ -36,8 +36,8 @@ public class GameUI : MonoBehaviour
     private void Init()
     {
         progressBar.value = 0;
-        levelText.text = "Level " + (ChunkManager.instance.GetLevel() + 1);
-        UpdateCoinsText(DataManager.instance.Coins);
+        levelText.text = "Level " + (ChunkManager.Instance.GetLevel() + 1);
+        UpdateCoinsText(DataManager.Instance.Coins);
     }
 
     public void Show()
@@ -57,10 +57,10 @@ public class GameUI : MonoBehaviour
 
     public void UpdateProgressBar()
     {
-        if (!GameManager.instance.IsGameState())
+        if (!GameManager.Instance.IsGameState())
             return;
 
-        float progress = PlayerController.instance.transform.position.z / ChunkManager.instance.GetFinishZ();
+        float progress = PlayerController.Instance.transform.position.z / ChunkManager.Instance.GetFinishZ();
         progressBar.value = progress;
     }
 }

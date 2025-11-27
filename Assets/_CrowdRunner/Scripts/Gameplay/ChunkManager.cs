@@ -2,21 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ChunkManager : MonoBehaviour
+public class ChunkManager : Singleton<ChunkManager>
 {
-    public static ChunkManager instance;
-
     [Header("Prefabs")]
     [SerializeField] private LevelSO[] levelSO;
     private GameObject finishLine;
-
-    private void Awake()
-    {
-        if (instance != null)
-            Destroy(instance);
-        else
-            instance = this;
-    }
 
     // Start is called before the first frame update
     void Start()
