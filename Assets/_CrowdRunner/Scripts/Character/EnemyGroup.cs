@@ -21,6 +21,7 @@ public class EnemyGroup : MonoBehaviour
 
     private Transform runnerParent;
     private List<Enemy> enemies = new List<Enemy>();
+    private Collider[] detectColliders = new Collider[10];
 
     [Header("Events")]
     public static Action OnCombatStart;
@@ -42,17 +43,14 @@ public class EnemyGroup : MonoBehaviour
     // Checking if runner is in the search radius
     private void FindTarget()
     {
-        Collider[] detectColliders = Physics.OverlapSphere(transform.position, searchRadius);
+        int numColliders = Physics.OverlapSphereNonAlloc(transform.position, searchRadius, detectColliders, LayerMask.GetMask("Player"));
 
-        for (int i = 0; i < detectColliders.Length; i++)
+        if (numColliders > 0)
         {
-            if (detectColliders[i].TryGetComponent<Runner>(out _))
-            {
-                hasTrigger = true;
-                TriggerEnemies(); // Trigger enemies to chase
-                OnCombatStart?.Invoke();
-                return;
-            }
+            hasTrigger = true;
+            TriggerEnemies(); // Trigger enemies to chase
+            OnCombatStart?.Invoke();
+            return;
         }
     }
 

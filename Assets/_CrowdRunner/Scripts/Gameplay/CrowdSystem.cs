@@ -1,9 +1,10 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
-public class CrowdSystem : MonoBehaviour
+public class CrowdSystem : Singleton<CrowdSystem>
 {
     [Header("References")]
     [SerializeField] private Transform runnerParent;
@@ -13,20 +14,24 @@ public class CrowdSystem : MonoBehaviour
     [Header("Settings")]
     [SerializeField] private float radius = 0.5f;
     [SerializeField] private float angle = 137.508f; // 137.508 is golden angle
+    [SerializeField] private float lerpSpeed = 10f;
 
     [Header("Events")]
     public static Action<int> onLevelCompleteRunnerCount;
 
+    private HashSet<Obstacle> activeObstacles = new HashSet<Obstacle>();
+    private bool shouldLerpRunners = false; // For checking place runners smooth or not
+
     private void OnEnable()
     {
         DataManager.onRunnersLevelChanged += SpawnRunners;
-        GameManager.onGameStateChanged += onGameStateChangedCallback;
+        GameManager.onGameStateChanged += OnGameStateChangedCallback;
     }
 
     private void OnDisable()
     {
         DataManager.onRunnersLevelChanged -= SpawnRunners;
-        GameManager.onGameStateChanged -= onGameStateChangedCallback;
+        GameManager.onGameStateChanged -= OnGameStateChangedCallback;
     }
 
     private void Start()
@@ -37,7 +42,19 @@ public class CrowdSystem : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        PlaceRunners();
+        // Only reposition if not colliding with any obstacle
+        if (activeObstacles.Count <= 0)
+        {
+            if (shouldLerpRunners)
+                PlaceSmoothRunners();
+            else
+                PlaceRunners();
+        }
+
+        //if (isLerpRunners)
+        //else
+        //    PlaceRunners();
+
 
         if (!GameManager.Instance.IsGameState())
             return;
@@ -46,7 +63,7 @@ public class CrowdSystem : MonoBehaviour
             GameManager.Instance.SetGameState(GameManager.GameState.GameOver);
     }
 
-    private void onGameStateChangedCallback(GameManager.GameState state)
+    private void OnGameStateChangedCallback(GameManager.GameState state)
     {
         if (state == GameManager.GameState.LevelComplete)
             onLevelCompleteRunnerCount?.Invoke(runnerParent.childCount);
@@ -60,7 +77,27 @@ public class CrowdSystem : MonoBehaviour
         if(runnerToAdd > 0)
             AddRunner(runnerToAdd, false); // Spawn the runners with idle animation
     }
-    
+
+    private void PlaceSmoothRunners()
+    {
+        bool allRunnersInPlace = true;
+
+        for (int i = 0; i < runnerParent.childCount; i++)
+        {
+            Vector3 targetPos = GetRunnerLocalPos(i);
+            Transform runner = runnerParent.GetChild(i);
+            runner.localPosition = Vector3.Lerp(runner.localPosition, targetPos, Time.deltaTime * lerpSpeed);
+
+            if (Vector3.Distance(runner.localPosition, targetPos) > 0.01f)
+            {
+                allRunnersInPlace = false;
+            }
+        }
+
+        if(allRunnersInPlace)
+            shouldLerpRunners = false;
+    }
+
     private void PlaceRunners()
     {
         for (int i = 0; i < runnerParent.childCount; i++)
@@ -124,5 +161,16 @@ public class CrowdSystem : MonoBehaviour
             characterToDestroy.SetParent(null);
             Destroy(characterToDestroy.gameObject);
         }
+    }
+
+    public void RegisterObstacle(Obstacle obstacle)
+    {
+        activeObstacles.Add(obstacle);
+    }
+
+    public void UnregisterObstacle(Obstacle obstacle)
+    {
+        shouldLerpRunners = true;
+        activeObstacles.Remove(obstacle);
     }
 }

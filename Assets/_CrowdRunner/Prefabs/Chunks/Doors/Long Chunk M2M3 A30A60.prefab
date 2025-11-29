@@ -10,13 +10,18 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 460149129158794634, guid: 0c5a4fc908984984f8d43c18bb680e72,
         type: 3}
+      propertyPath: leftDoorType
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 460149129158794634, guid: 0c5a4fc908984984f8d43c18bb680e72,
+        type: 3}
       propertyPath: rightDoorType
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 460149129158794634, guid: 0c5a4fc908984984f8d43c18bb680e72,
         type: 3}
       propertyPath: leftDoorAmount
-      value: 10
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 460149129158794634, guid: 0c5a4fc908984984f8d43c18bb680e72,
         type: 3}
@@ -150,7 +155,7 @@ PrefabInstance:
     - target: {fileID: 6840002678568587751, guid: e19b0057d73e50b4bbf0d4b3020236fc,
         type: 3}
       propertyPath: m_Name
-      value: Long Chunk A10M3 S15S5
+      value: Long Chunk M2M3 A30A60
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -182,22 +187,22 @@ PrefabInstance:
     - target: {fileID: 460149129158794634, guid: 0c5a4fc908984984f8d43c18bb680e72,
         type: 3}
       propertyPath: leftDoorType
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 460149129158794634, guid: 0c5a4fc908984984f8d43c18bb680e72,
         type: 3}
       propertyPath: rightDoorType
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 460149129158794634, guid: 0c5a4fc908984984f8d43c18bb680e72,
         type: 3}
       propertyPath: leftDoorAmount
-      value: 15
+      value: 30
       objectReference: {fileID: 0}
     - target: {fileID: 460149129158794634, guid: 0c5a4fc908984984f8d43c18bb680e72,
         type: 3}
       propertyPath: rightDoorAmount
-      value: 5
+      value: 60
       objectReference: {fileID: 0}
     - target: {fileID: 2985052289281325486, guid: 0c5a4fc908984984f8d43c18bb680e72,
         type: 3}

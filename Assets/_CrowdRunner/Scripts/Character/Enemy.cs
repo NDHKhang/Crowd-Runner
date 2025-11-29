@@ -8,14 +8,10 @@ public class Enemy : MonoBehaviour
     enum State { Idle, Running }
 
     [Header("Settings")]
-    [SerializeField] private float searchRadius = 1f;
     [SerializeField] private float moveSpeed = 10f;
     private State state;
     private Transform targetRunner;
     private EnemyGroup enemyGroup;
-
-    [Header("Events")]
-    public static Action onEnemyDead;
 
     // Start is called before the first frame update
     void Start()
@@ -36,32 +32,10 @@ public class Enemy : MonoBehaviour
         switch (state)
         {
             case State.Idle:
-                //FindTarget();
                 break;
             case State.Running:
                 RunToTarget();
                 break;
-        }
-    }
-
-    private void FindTarget()
-    {
-        Collider[] detectColliders = Physics.OverlapSphere(transform.position, searchRadius);
-
-        for (int i = 0; i < detectColliders.Length; i++)
-        {
-            if (detectColliders[i].TryGetComponent(out Runner runner))
-            {
-                if (runner.IsTarget)
-                    continue;
-
-                runner.IsTarget = true;
-                targetRunner = runner.transform;
-
-                EnterRunningState();
-
-                return; // prevent an enemy from targeting mutiple runners
-            }
         }
     }
 
@@ -96,7 +70,6 @@ public class Enemy : MonoBehaviour
             if(targetRunner.TryGetComponent(out Runner runner))
             {
                 enemyGroup.OnEnemyDestroyed(this);
-                onEnemyDead?.Invoke();
 
                 Destroy(targetRunner.gameObject);
                 Destroy(gameObject);

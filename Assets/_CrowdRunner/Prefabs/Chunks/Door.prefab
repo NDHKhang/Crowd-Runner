@@ -181,7 +181,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 9cfe088608d58244a95aea1c61253f2e, type: 3}
-  m_Color: {r: 0.23137254, g: 0.9254902, b: 1, a: 1}
+  m_Color: {r: 0.23137254, g: 0.83137256, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -265,7 +265,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 9cfe088608d58244a95aea1c61253f2e, type: 3}
-  m_Color: {r: 0.23137254, g: 0.9886721, b: 1, a: 1}
+  m_Color: {r: 0.23137254, g: 0.8305178, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -944,7 +944,7 @@ GameObject:
   - component: {fileID: 2985052289281325486}
   - component: {fileID: 460149129158794634}
   - component: {fileID: 3085745506059718861}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Door
   m_TagString: Untagged
   m_Icon: {fileID: 0}

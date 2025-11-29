@@ -11,7 +11,7 @@ public class VibrationManager : MonoBehaviour
     void OnEnable()
     {
         PlayerCollision.onDoorHit += Vibrate;
-        Enemy.onEnemyDead += Vibrate;
+        Runner.onRunnerDead += Vibrate;
 
         GameManager.onGameStateChanged += GameStateChangedCallback;
     }
@@ -19,7 +19,7 @@ public class VibrationManager : MonoBehaviour
     private void OnDisable()
     {
         PlayerCollision.onDoorHit -= Vibrate;
-        Enemy.onEnemyDead -= Vibrate;
+        Runner.onRunnerDead -= Vibrate;
 
         GameManager.onGameStateChanged -= GameStateChangedCallback;
     }

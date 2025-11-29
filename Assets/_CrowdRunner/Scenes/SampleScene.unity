@@ -790,7 +790,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.16470587, g: 0.85215807, b: 1, a: 1}
+  m_Color: {r: 0.16470587, g: 0.96483296, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -1306,6 +1306,37 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!1 &232555533
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 232555534}
+  m_Layer: 0
+  m_Name: ---- MANAGERS ----
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &232555534
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 232555533}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &236529319
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1504,7 +1535,7 @@ GameObject:
   m_Component:
   - component: {fileID: 276880949}
   m_Layer: 0
-  m_Name: -- MANAGERS --
+  m_Name: ---- MANAGERS ----
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1524,7 +1555,6 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1016892168}
-  - {fileID: 865613759}
   - {fileID: 463105606}
   - {fileID: 1906041404}
   - {fileID: 104488253}
@@ -5246,7 +5276,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 276880949}
+  m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &865613760
 MonoBehaviour:
@@ -5261,9 +5291,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   levelSO:
-  - {fileID: 11400000, guid: 23d5b4d768f7f314c90edad54b0055be, type: 2}
   - {fileID: 11400000, guid: 0b639dba68dabd64ea6979039621755f, type: 2}
+  - {fileID: 11400000, guid: add3478646583934f8cbff55b3206087, type: 2}
   - {fileID: 11400000, guid: caee04b9e43e36d4ba17f84dbb7548fb, type: 2}
+  - {fileID: 11400000, guid: 5f6489a0dd66a364b8d7d739efbe4731, type: 2}
 --- !u!1 &868929996
 GameObject:
   m_ObjectHideFlags: 0
@@ -8077,7 +8108,7 @@ MonoBehaviour:
   incomeMultiplierPerLevel: 0.1
   runnersToMultiplierRatio: 25
   maxRunnersMultiplier: 5
-  rewardedAdsCoins: 250
+  rewardedAdsCoins: 200
 --- !u!1 &1204820947
 GameObject:
   m_ObjectHideFlags: 0
@@ -8951,7 +8982,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _androidGameId: 5993005
   _iOSGameId: 5993004
-  _testMode: 1
+  _testMode: 0
 --- !u!114 &1315445156
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -14308,8 +14339,9 @@ MonoBehaviour:
   characterPrefab: {fileID: 1656884253556796753, guid: d42e21dd2178a104399a33169b46636c,
     type: 3}
   playerAnimator: {fileID: 8877166439220141849}
-  radius: 0.39
+  radius: 0.34
   angle: 137.508
+  lerpSpeed: 5
 --- !u!114 &8877166439220141849
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -14345,7 +14377,9 @@ SceneRoots:
   - {fileID: 1366196409}
   - {fileID: 423814535}
   - {fileID: 276880949}
+  - {fileID: 865613759}
   - {fileID: 1315445151}
   - {fileID: 1331243622}
+  - {fileID: 232555534}
   - {fileID: 2066813153}
   - {fileID: 527539111}

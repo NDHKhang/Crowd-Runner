@@ -11,6 +11,9 @@ public class PlayerCollision : MonoBehaviour
 
     [Header("Event")]
     public static Action onDoorHit;
+    public static Action onPlayerDead;
+
+    private Collider[] detectColliders = new Collider[10];
 
     // Update is called once per frame
     void Update()
@@ -22,9 +25,9 @@ public class PlayerCollision : MonoBehaviour
     private void HandleDoorCollision()
     {
         // Detect colliders in a radius of 1 around the player
-        Collider[] detectColliders = Physics.OverlapSphere(transform.position, 1);
+        int numColliders = Physics.OverlapSphereNonAlloc(transform.position, 1f, detectColliders, LayerMask.GetMask("Door", "Finish"));
 
-        for (int i = 0; i < detectColliders.Length; i++)
+        for (int i = 0; i < numColliders; i++)
         {
             if (detectColliders[i].TryGetComponent(out Doors doors))
             {

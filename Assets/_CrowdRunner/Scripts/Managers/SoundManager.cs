@@ -18,7 +18,7 @@ public class SoundManager : MonoBehaviour
     void OnEnable()
     {
         PlayerCollision.onDoorHit += PlayDoorHitSound;
-        Enemy.onEnemyDead += PlayRunnerDieSound;
+        Runner.onRunnerDead += PlayRunnerDieSound;
 
         GameManager.onGameStateChanged += GameStateChangedCallBack;
     }
@@ -26,7 +26,7 @@ public class SoundManager : MonoBehaviour
     private void OnDisable()
     {
         PlayerCollision.onDoorHit -= PlayDoorHitSound;
-        Enemy.onEnemyDead -= PlayRunnerDieSound;
+        Runner.onRunnerDead -= PlayRunnerDieSound;
 
         GameManager.onGameStateChanged -= GameStateChangedCallBack;
     }
