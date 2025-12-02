@@ -10,6 +10,7 @@ public class CrowdSystem : Singleton<CrowdSystem>
     [SerializeField] private Transform runnerParent;
     [SerializeField] private GameObject characterPrefab;
     [SerializeField] private PlayerAnimator playerAnimator;
+    [SerializeField] private PlayerSelector playerSelector;
 
     [Header("Settings")]
     [SerializeField] private float radius = 0.5f;
@@ -50,11 +51,6 @@ public class CrowdSystem : Singleton<CrowdSystem>
             else
                 PlaceRunners();
         }
-
-        //if (isLerpRunners)
-        //else
-        //    PlaceRunners();
-
 
         if (!GameManager.Instance.IsGameState())
             return;
@@ -141,7 +137,9 @@ public class CrowdSystem : Singleton<CrowdSystem>
     {
         for (int i = 0; i < amount; i++)
         {
-            Instantiate(characterPrefab, runnerParent);
+            GameObject newRunner = Instantiate(characterPrefab, runnerParent);
+            // Apply skin whenever spawn new runners
+            newRunner.GetComponent<RunnerSkinSelector>().SelectRunnerSkin(playerSelector.CurrentSkinIndex);
         }
 
         if(triggerAnimation)

@@ -39,7 +39,7 @@ public class Obstacle : MonoBehaviour
         }
         else if (!isColliding && isRegisted)
         {
-            StartCoroutine(UnregisterAfterDelay(1.5f)); // Delay before allowing reposition
+            StartCoroutine(UnregisterAfterDelay(0.2f)); // Delay before allowing reposition
             isRegisted = false;
         }
 

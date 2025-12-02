@@ -150,7 +150,9 @@ MonoBehaviour:
     type: 3}
   enemiesParent: {fileID: 6172647673018475365}
   amount: 0
-  radius: 0.5
+  searchRadius: 5
+  hasTrigger: 0
+  radius: 0.45
   angle: 137.508
 --- !u!1 &8160532961408929476
 GameObject:

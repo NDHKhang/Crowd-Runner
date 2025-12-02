@@ -7,7 +7,7 @@ using UnityEngine.SceneManagement;
 public class PlayerCollision : MonoBehaviour
 {
     [Header("References")]
-    [SerializeField] private CrowdSystem crowdArranger;
+    [SerializeField] private CrowdSystem crowdSystem;
 
     [Header("Event")]
     public static Action onDoorHit;
@@ -39,7 +39,7 @@ public class PlayerCollision : MonoBehaviour
                 int doorAmount = doors.GetDoorAmount(transform.position.x);
                 DoorType doorType = doors.GetDoorType(transform.position.x);
 
-                crowdArranger.ApplyAmount(doorType, doorAmount);
+                crowdSystem.ApplyAmount(doorType, doorAmount);
             }
             else if (detectColliders[i].CompareTag("Finish"))
             {

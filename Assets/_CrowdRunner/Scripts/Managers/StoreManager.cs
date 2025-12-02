@@ -97,7 +97,6 @@ public class StoreManager : Singleton<StoreManager>
 
     public void OpenSkin()
     {
-
         List<SkinButton> skinButtonsList = new List<SkinButton>();
         for(int i = 0; i < skinButtons.Length; i++)
         {
@@ -112,11 +111,11 @@ public class StoreManager : Singleton<StoreManager>
 
         UnlockSkin(randomSkinButton.Index);
         SetSelectedSkin(randomSkinButton);
-        DataManager.Instance.WithDrawCoins(currentPrice);
-
-        // Calculate current price
-        currentPrice += priceIncreasePerSkin;
+        int skinPrice = currentPrice;
+        currentPrice += priceIncreasePerSkin; // Calculate current price
         onPriceChanged?.Invoke(currentPrice);
+
+        DataManager.Instance.WithDrawCoins(skinPrice);
         SaveLoadManager.SaveInt(CURRENT_PRICE_KEY, currentPrice);
     }
 

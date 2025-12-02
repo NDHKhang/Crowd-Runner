@@ -61,7 +61,7 @@ PrefabInstance:
     - target: {fileID: 8670590006207985919, guid: 0625394f546bbd84ca61608de859b76e,
         type: 3}
       propertyPath: m_Name
-      value: Medium Chunk Near A40M3 A25A40
+      value: Medium Chunk Near A5A10 M3M6
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -92,18 +92,23 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 460149129158794634, guid: 0c5a4fc908984984f8d43c18bb680e72,
         type: 3}
+      propertyPath: leftDoorType
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 460149129158794634, guid: 0c5a4fc908984984f8d43c18bb680e72,
+        type: 3}
       propertyPath: rightDoorType
-      value: 2
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 460149129158794634, guid: 0c5a4fc908984984f8d43c18bb680e72,
         type: 3}
       propertyPath: leftDoorAmount
-      value: 40
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 460149129158794634, guid: 0c5a4fc908984984f8d43c18bb680e72,
         type: 3}
       propertyPath: rightDoorAmount
-      value: 3
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 2985052289281325486, guid: 0c5a4fc908984984f8d43c18bb680e72,
         type: 3}
@@ -182,17 +187,22 @@ PrefabInstance:
     - target: {fileID: 460149129158794634, guid: 0c5a4fc908984984f8d43c18bb680e72,
         type: 3}
       propertyPath: leftDoorType
-      value: 0
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 460149129158794634, guid: 0c5a4fc908984984f8d43c18bb680e72,
+        type: 3}
+      propertyPath: rightDoorType
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 460149129158794634, guid: 0c5a4fc908984984f8d43c18bb680e72,
         type: 3}
       propertyPath: leftDoorAmount
-      value: 25
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 460149129158794634, guid: 0c5a4fc908984984f8d43c18bb680e72,
         type: 3}
       propertyPath: rightDoorAmount
-      value: 40
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 2985052289281325486, guid: 0c5a4fc908984984f8d43c18bb680e72,
         type: 3}

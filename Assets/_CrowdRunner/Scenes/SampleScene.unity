@@ -566,12 +566,12 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 54
+  m_fontSize: 46
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
-  m_fontSizeMin: 54
-  m_fontSizeMax: 65
+  m_fontSizeMin: 46
+  m_fontSizeMax: 60
   m_fontStyle: 16
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
@@ -1514,10 +1514,10 @@ MonoBehaviour:
   m_Padding:
     m_Left: 0
     m_Right: 0
-    m_Top: 119
+    m_Top: 50
     m_Bottom: 0
   m_ChildAlignment: 4
-  m_Spacing: 0
+  m_Spacing: -85
   m_ChildForceExpandWidth: 1
   m_ChildForceExpandHeight: 1
   m_ChildControlWidth: 0
@@ -5292,9 +5292,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   levelSO:
   - {fileID: 11400000, guid: 0b639dba68dabd64ea6979039621755f, type: 2}
-  - {fileID: 11400000, guid: add3478646583934f8cbff55b3206087, type: 2}
   - {fileID: 11400000, guid: caee04b9e43e36d4ba17f84dbb7548fb, type: 2}
   - {fileID: 11400000, guid: 5f6489a0dd66a364b8d7d739efbe4731, type: 2}
+  - {fileID: 11400000, guid: aefac60f279412d4ca018cb8712ff806, type: 2}
+  - {fileID: 11400000, guid: 280421678c6225e4face923cc916ee1f, type: 2}
+  - {fileID: 11400000, guid: 5f2f98aa476f6db4b92f8dc0242c334d, type: 2}
 --- !u!1 &868929996
 GameObject:
   m_ObjectHideFlags: 0
@@ -5897,6 +5899,7 @@ GameObject:
   m_Component:
   - component: {fileID: 985623264}
   - component: {fileID: 985623267}
+  - component: {fileID: 985623268}
   - component: {fileID: 985623265}
   m_Layer: 0
   m_Name: Close Button X
@@ -5923,7 +5926,7 @@ RectTransform:
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: -70, y: -65}
-  m_SizeDelta: {x: 60, y: 60}
+  m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &985623265
 MonoBehaviour:
@@ -5965,7 +5968,7 @@ MonoBehaviour:
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
   m_Interactable: 1
-  m_TargetGraphic: {fileID: 347176256}
+  m_TargetGraphic: {fileID: 985623268}
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
@@ -5989,6 +5992,36 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 985623263}
   m_CullTransparentMesh: 1
+--- !u!114 &985623268
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 985623263}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 0}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 0}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
 --- !u!1 &986254912
 GameObject:
   m_ObjectHideFlags: 0
@@ -8106,7 +8139,7 @@ MonoBehaviour:
   baseUpgradeCost: 100
   baseIncome: 30
   incomeMultiplierPerLevel: 0.1
-  runnersToMultiplierRatio: 25
+  runnersToMultiplierRatio: 20
   maxRunnersMultiplier: 5
   rewardedAdsCoins: 200
 --- !u!1 &1204820947
@@ -8289,7 +8322,7 @@ Canvas:
   m_AdditionalShaderChannelsFlag: 25
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_TargetDisplay: 0
 --- !u!1 &1257603675
 GameObject:
@@ -14307,8 +14340,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   crowdArranger: {fileID: 8877166439220141848}
   playerAnimator: {fileID: 8877166439220141849}
-  moveSpeed: 10
-  roadWidth: 10
+  moveSpeed: 12
+  roadWidth: 11
   slideSpeed: 10
 --- !u!114 &8877166439220141847
 MonoBehaviour:
@@ -14322,7 +14355,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ec11d19b03e120d4f88d28e1dfa2e031, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  crowdArranger: {fileID: 8877166439220141848}
+  crowdSystem: {fileID: 8877166439220141848}
 --- !u!114 &8877166439220141848
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -14336,12 +14369,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   runnerParent: {fileID: 1929482194}
-  characterPrefab: {fileID: 1656884253556796753, guid: d42e21dd2178a104399a33169b46636c,
+  characterPrefab: {fileID: 1656884253556796753, guid: 8a14e5319114d6545b1bc697127e8712,
     type: 3}
   playerAnimator: {fileID: 8877166439220141849}
+  playerSelector: {fileID: 8877166439220141850}
   radius: 0.34
   angle: 137.508
-  lerpSpeed: 5
+  lerpSpeed: 7
 --- !u!114 &8877166439220141849
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -14368,7 +14402,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   runnersParent: {fileID: 1929482194}
-  runnerSelectorPrefab: {fileID: 976373697559530241, guid: d42e21dd2178a104399a33169b46636c,
+  runnerSelectorPrefab: {fileID: 976373697559530241, guid: 8a14e5319114d6545b1bc697127e8712,
     type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
