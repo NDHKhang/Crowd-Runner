@@ -11,7 +11,6 @@ public class Obstacle : MonoBehaviour
 
     private void Start()
     {
-        BoxCollider boxCollider = GetComponent<BoxCollider>();
         boxSize = transform.lossyScale;
     }
 
